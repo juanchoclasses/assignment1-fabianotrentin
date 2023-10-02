@@ -312,20 +312,20 @@ export class SpreadSheetController {
       return;
     }
     const userEditing = this._contributingUsers.get(user);
-    if (!userEditing) {
+    if (!userEditing!.isEditing) {
       return;
     }
-    if (userEditing.cellLabel === '') {
+    if (userEditing!.cellLabel === '') {
       return;
     }
 
-    userEditing.formulaBuilder.setFormula([]);
+    userEditing!.formulaBuilder.setFormula([]);
     let cellBeingEdited = this._contributingUsers.get(user)?.cellLabel;
 
     // this should not empty but just in case throw error
     if (cellBeingEdited) {
       let cell = this._memory.getCellByLabel(cellBeingEdited);
-      cell.setFormula(userEditing.formulaBuilder.getFormula());
+      cell.setFormula(userEditing!.formulaBuilder.getFormula());
       this._memory.setCellByLabel(cellBeingEdited, cell);
     }
     this._calculationManager.evaluateSheet(this._memory);
