@@ -83,7 +83,10 @@ function SpreadSheet({ documentName }: SpreadSheetProps) {
    */
   async function onCommandButtonClick(text: string): Promise<void> {
 
-
+    if (!userName) {
+      alert("Please enter a user name");
+      return;
+    }
     switch (text) {
       case ButtonNames.edit_toggle:
         if (currentlyEditing) {
@@ -117,6 +120,10 @@ function SpreadSheet({ documentName }: SpreadSheetProps) {
    * */
   function onButtonClick(event: React.MouseEvent<HTMLButtonElement>): void {
 
+    if (!userName) {
+      alert("Please enter a user name");
+      return;
+    }
     const text = event.currentTarget.textContent;
     let trueText = text ? text : "";
     spreadSheetClient.setEditStatus(true);
@@ -137,6 +144,10 @@ function SpreadSheet({ documentName }: SpreadSheetProps) {
    */
   function onCellClick(event: React.MouseEvent<HTMLButtonElement>): void {
 
+    if (!userName) {
+      alert("Please enter a user name");
+      return;
+    }
     const cellLabel = event.currentTarget.getAttribute("cell-label");
     // calculate the current row and column of the clicked on cell
 
